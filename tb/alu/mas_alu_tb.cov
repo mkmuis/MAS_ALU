@@ -1,0 +1,56 @@
+////////////////////////////////////////////////////////////////////////////
+//Copyright 2021 Anthony Mui                                              //
+//                                                                        //
+//Licensed under the Apache License, Version 2.0 (the "License");         //
+//you may not use this file except in compliance with the License.        //
+//You may obtain a copy of the License at                                 //
+//                                                                        //
+//    http://www.apache.org/licenses/LICENSE-2.0                          //
+//                                                                        //
+//Unless required by applicable law or agreed to in writing, software     //
+//distributed under the License is distributed on an "AS IS" BASIS,       //
+//WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.//
+//See the License for the specific language governing permissions and     //
+//limitations under the License.                                          //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
+//Specific for 32 bits
+covergroup alu_cov; 
+    x_op1: coverpoint alu_tb.mas_alu_op1_test {
+      bins low = {[`MAS_BLEN'h00000000:`MAS_BLEN'h7FFFFFFF]};
+      bins high = {[`MAS_BLEN'h7FFFFFFF:`MAS_BLEN'hFFFFFFFF]};
+      option.at_least=4500;
+    }
+    x_op1_t: coverpoint alu_tb.mas_alu_op1_test {
+      bins targeted = {`MAS_BLEN'hAAAAAAAA,`MAS_BLEN'h55555555};
+      option.at_least=4;
+    }
+    x_op2: coverpoint alu_tb.mas_alu_op2_test {
+      bins low = {[`MAS_BLEN'h00000000:`MAS_BLEN'h7FFFFFFF]};
+      bins high = {[`MAS_BLEN'h7FFFFFFF:`MAS_BLEN'hFFFFFFFF]};
+      option.at_least=4500;
+    }
+    x_op2_t: coverpoint alu_tb.mas_alu_op2_test {
+      bins targeted = {`MAS_BLEN'hAAAAAAAA,`MAS_BLEN'h55555555};
+      option.at_least=4;
+    }
+    x_op2_rl: coverpoint alu_tb.mas_alu_op2_test {
+      bins rl = {[`MAS_BLEN'h00000000:`MAS_BLEN'h00000010]};
+      option.at_least=1000;
+    }
+    x_cmd_addsub: coverpoint alu_tb.mas_alu_cmd_test {
+      bins ADDSUB = {[MAS_ALU_CMD_ADD:MAS_ALU_CMD_SUB]};
+      option.at_least=1000;
+    }
+    x_cmd_rlshift: coverpoint alu_tb.mas_alu_cmd_test {
+      bins RLSHIFT = {[MAS_ALU_CMD_RIGHT_SHIFT:MAS_ALU_CMD_LEFT_SHIFT]};
+      option.at_least=1000;
+    }
+    x_addsub_cross: cross x_op1, x_op2, x_cmd_addsub {option.at_least=1000;}
+    x_rlshift_cross: cross x_op1, x_op2_rl, x_cmd_rlshift {option.at_least=1000;}
+    x_addsub_cross_t: cross x_op1_t, x_op2_t, x_cmd_addsub {option.at_least=1000;}
+    x_rlshift_cross_t: cross x_op1_t, x_op2_rl, x_cmd_rlshift {option.at_least=1000;}
+endgroup
+
+

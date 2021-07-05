@@ -12,7 +12,7 @@ Although the design is configurable in bit lengths, however, the testbench isn't
 
 ## How to run
 
-At directory mas_alu, to do compilation
+At directory MAS_ALU, to do compilation
 ```
 make run_alu
 ```

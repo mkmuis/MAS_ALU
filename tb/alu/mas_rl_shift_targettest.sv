@@ -111,5 +111,7 @@ initial begin
     $display(" Summary: %0d/%0d tests failed", rlshifttest.error, rlshifttest.test_size);
     $display("--------------------------------------\n");
 	end
+    rst_n = 1'b0;
+    #2;
     $finish;
 end 

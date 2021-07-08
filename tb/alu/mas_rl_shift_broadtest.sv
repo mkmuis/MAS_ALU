@@ -114,7 +114,9 @@ initial begin
   `ifdef TARGETED
     mas_alu_req_test = 1'b0;
     ->rlshift_broadtest_ev;
-  `else 
+  `else
+    #2; 
+    rst_n = 1'b0;
     $finish;
   `endif
 end 

@@ -41,6 +41,15 @@
 //Targeted test
 `define TARGETED
 
+//----------------------------------------------
+//  DEBUG PLATFORM
+//----------------------------------------------
+
+//DVE
+`define DVE
+//VERDI
+`define VERDI
+
 module alu_tb;
   logic clk;
   logic rst_n;
@@ -73,6 +82,20 @@ mas_alu_top mtop (.clk(clk),.rst_n(rst_n),
                       .mas_alu_ready(mas_alu_ready_test));
 
 always #2 clk = ~clk;
+//----------------------------------------------
+//  Waveform Dump
+//----------------------------------------------
+
+initial begin
+  `ifdef DVE
+  $vcdplusfile("MAS_ALU.vpd");
+  $vcdpluson;
+  `endif
+  `ifdef VERDI
+  $fsdbDumpfile("MAS_ALU.fsdb");
+  $fsdbDumpvars(0,alu_tb);
+  `endif
+end
 
 //----------------------------------------------
 //  Initialize Test/Design

@@ -26,7 +26,7 @@
 //----------------------------------------------
 
 //For initial test environment
-//`define MONITOR
+`define MONITOR
 //For small test size
 //`define VISUAL
 //For large test size, results write out to file
@@ -133,11 +133,10 @@ always@(posedge mtop.mfsm.mas_alu_fsm_ready) begin
   -> fsm_ready_ev; 
 end
 
-
 `ifdef MONITOR
 initial begin
-     $monitor("%0t,%p, CLK:%b, Req:%0b, FSM Ready:%0b, Operate:%0b, \
-     \n%p, OP1:%0d, OP2:%0d, RES:%0d, ALU READY:%0b, RESULTS:%0b\n",
+     $monitor("%0t,%s, CLK:%b, Req:%0b, FSM Ready:%0b, Operate:%0b, \
+     \n%s, OP1:%0d, OP2:%0d, RES:%0d, ALU READY:%0b, RESULTS:%0b\n",
      $time,mtop.mfsm.mas_alu_fsm_state,clk,mas_alu_req_test,
      mtop.mdec.mas_alu_fsm_ready,mtop.mfsm.mas_alu_fsm_oper,
      mas_alu_cmd_test,mas_alu_op1_test,mas_alu_op2_test,mas_alu_res_test,

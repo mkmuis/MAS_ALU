@@ -26,7 +26,7 @@
 //----------------------------------------------
 
 //For initial test environment
-`define MONITOR
+//`define MONITOR
 //For small test size
 //`define VISUAL
 //For large test size, results write out to file
